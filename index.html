@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>API</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container my-5 mx-auto col-md-4">
+        <h1 class="text-muted text-center my-4">Weather API</h1>
+        <div class="input-group my-4 text-center text-muted">
+            <input type="text" name="city" class="form-control p-4" id="input-city" placeholder="Enter City">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-primary" id="submit-btn">Go</button>
+            </div>
+          </div>
+        
+        <div class="card shadow-lg rounded" id="card-data">
+            <img id="img-icon" class="icon mx-auto text-center">
+            <div class="text-muted text-uppercase text-center details">
+                <h5 class="my-3" id="city-name"></h5>
+                <div class="my-3" id="div-desc"></div>
+                <div class="display-4 my-4">
+                    <span id="spn-temp"></span>
+                    <span>&deg;F</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+  
+        $(document).ready(function(){
+            $("#card-data").hide();
+                $("#submit-btn").click(function(){
+                    var city = $("#input-city").val();
+                   
+                    // $("#img-live").css("display:none");
+                    $.ajax({
+                            type: "POST",
+                            //url: "http://api.openweathermap.org/data/2.5/group?id=2643741,2644688,2633352,2654675,2988507,2990969,2911298,2925535,2950159,3120501,3128760,5128581,4140963,4930956,5106834,5391959,5368361,5454711,5490263,5475433&appid=a37cec0467561d22f52c421d0f1c7aa9&units=imperial",
+                            url : "http://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid=a37cec0467561d22f52c421d0f1c7aa9&units=imperial",
+                            dataType: "json",
+                            success: function (result, status, xhr) {
+                                console.log(result);
+                               
+                                //let cityId = result.id;
+                                let cityName = result.name;
+                                let temp = result.main.temp;
+                                let description = result.weather[0].main;
+                                let icon = result.weather[0].icon;
+                                //let countyName = result.sys.country;
+                                let iconUrl = `http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
+                                $("#img-icon").attr('src',iconUrl);
+                                $("#city-name").text(cityName);
+                                $("#div-desc").text(description);
+                                $("#spn-temp").text(temp);
+                                $("#card-data").show();
+                                //let data = `<p> City ID : ${cityId} </p><p> City Name : ${cityName} </p><p> Temperature (F) : ${temp} </p> <p>Country : ${countyName} </p>`;
+                               // console.log(data);
+                                
+
+                                                        
+                            },
+                            error: function (xhr, status, error) {
+                                alert(error +" Try Different City");
+                                console.log(error);
+                               
+                            }
+                
+                });
+            });
+        });
+
+    
+    
+     </script>
+
+
+
+    
+</body>
+</html>

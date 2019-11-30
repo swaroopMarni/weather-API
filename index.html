@@ -44,7 +44,7 @@
                     $.ajax({
                             type: "POST",
                             //url: "http://api.openweathermap.org/data/2.5/group?id=2643741,2644688,2633352,2654675,2988507,2990969,2911298,2925535,2950159,3120501,3128760,5128581,4140963,4930956,5106834,5391959,5368361,5454711,5490263,5475433&appid=a37cec0467561d22f52c421d0f1c7aa9&units=imperial",
-                            url : "http://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid=a37cec0467561d22f52c421d0f1c7aa9&units=imperial",
+                            url : "https://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid=a37cec0467561d22f52c421d0f1c7aa9&units=imperial",
                             dataType: "json",
                             success: function (result, status, xhr) {
                                 console.log(result);

@@ -47,7 +47,7 @@
                             url : "https://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid=a37cec0467561d22f52c421d0f1c7aa9&units=imperial",
                             dataType: "json",
                             success: function (result, status, xhr) {
-                                console.log(result);
+                               // console.log(result);
                                
                                 //let cityId = result.id;
                                 let cityName = result.name;
@@ -55,7 +55,7 @@
                                 let description = result.weather[0].main;
                                 let icon = result.weather[0].icon;
                                 //let countyName = result.sys.country;
-                                let iconUrl = `http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
+                                let iconUrl = `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
                                 $("#img-icon").attr('src',iconUrl);
                                 $("#city-name").text(cityName);
                                 $("#div-desc").text(description);
@@ -69,7 +69,7 @@
                             },
                             error: function (xhr, status, error) {
                                 alert(error +" Try Different City");
-                                console.log(error);
+                                //console.log(error);
                                
                             }
                 
